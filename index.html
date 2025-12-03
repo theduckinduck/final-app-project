@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-head">
+        <h1>Quiz App</h1>
+        <p class="lead">Answer questions, track progress, and review your score.</p>
+    </header>
+
+    <main class="container quiz-layout">
+        <section class="panel quiz-panel">
+            <div class="question-header">
+                <div class="q-meta">
+                    <span class="questionNumber">Question <strong id="questionIndex">1</strong></span>
+                    <span class="questionTotal">of <strong id="questionTotal">5</strong></span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" id="progress-bar" aria-hidden="true"><div class="progress-fill" style="width:20%"></div></div>
+                </div>
+            </div>
+
+            <article class="question-card" id="question-card">
+                <h2 id="questionText">Sample question goes here?</h2>
+                <ul id="options-list" class="options-list">
+                    <li><button class="option">Option A</button></li>
+                    <li><button class="option">Option B</button></li>
+                    <li><button class="option">Option C</button></li>
+                    <li><button class="option">Option D</button></li>
+                </ul>
+            </article>
+
+            <div class="controls">
+                <button id="prev-btn" class="ghost">Previous</button>
+                <button id="next-btn">Next</button>
+                <button id="submit-btn" class="primary hidden">Submit Quiz</button>
+            </div>
+        </section>
+
+        <aside class="panel sidebar">
+            <h3>Summary</h3>
+            <div class="sidebar-block">
+                <p><strong id="answered-count">0</strong> answered</p>
+                <p><strong id="correct-count">0</strong> correct</p>
+            </div>
+            <div class="sidebar-block">
+                <h4>Question Map</h4>
+                <div id="question-map" class="question-map">
+                    <!-- numbered buttons for quick jump -->
+                    <button class="map-item">1</button>
+                    <button class="map-item">2</button>
+                    <button class="map-item">3</button>
+                </div>
+            </div>
+            <div class="sidebar-block small muted">Tip: Use keyboard arrows to navigate.</div>
+        </aside>
+    </main>
+
+    <footer class="site-foot">
+        <small>hi lemme get a good grade plez </small>
+    </footer>
+</body>
+</html>
