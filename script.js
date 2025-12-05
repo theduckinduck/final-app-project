@@ -203,18 +203,28 @@ function renderQuestionMap() {
             renderQuestion();
         });
 
-        // G. Add the newly created button to the map container.
         mapContainer.appendChild(buttonElement);
     });
 }
 
-function updateSidebarCounts(){
+/* function updateSidebarCounts(){
     const answered = answers.filter(a => a !== null).length;
     fetchElements("answered-count").textContent = answered;
-    // correct count is shown only after submit; keep 0 before submit
     fetchElements("correct-count").textContent = 0;
 }
+*/
 
+function updateSidebarCounts() {
+    const answeredCount = answers.filter(a => a !== null).length;
+
+    const answeredElement = document.getElementById("answered-count");
+    answeredElement.textContent = answeredCount;
+
+    const correctElement = document.getElementById("correct-count");
+    correctElement.textContent = 0;
+}
+
+/*
 function onSubmit(){
     let correct = 0;
     answers.forEach((a, i) => {
@@ -230,8 +240,42 @@ function onSubmit(){
     alert(`You scored ${correct} out of ${quizQuestions.length}`);
     // con cat 
 }
+*/
 
+function onSubmit() {
+    let correctCount = 0;
 
+    answers.forEach((userAnswerIndex, questionIndex) => {
+        const correctAnswerIndex = quizQuestions[questionIndex].correct;
+
+        if (userAnswerIndex === correctAnswerIndex) {
+            correctCount++;
+        }
+    });
+
+    const correctScoreElement = document.getElementById("correct-count");
+    correctScoreElement.textContent = correctCount;
+
+    const mapContainer = document.getElementById("question-map");
+
+    const mapButtons = mapContainer.querySelectorAll(".map-item");
+
+    //ai helpe
+    mapButtons.forEach((button, i) => {
+        if (answers[i] === null) {
+            button.style.background = "rgba(255,255,255,0.02)";
+        } else {
+            const isCorrect = answers[i] === quizQuestions[i].correct;
+
+            button.style.background = isCorrect ? "rgba(53, 194, 178, 0.3)" : "rgba(255, 123, 123, 0.3)";
+        }
+    });
+
+    alert(`You scored ${correctCount} out of ${quizQuestions.length}`);
+    //  con cat n nate
+}
+
+/*
 // load allat stuff
 document.addEventListener("DOMContentLoaded", () => {
     // render allat stuff
@@ -247,5 +291,37 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (event) => {
         if (event.key === "ArrowRight") goForward();
         if (event.key === "ArrowLeft") goBack();
+    });
+});
+*/
+
+//load everything, AI assisted
+document.addEventListener("DOMContentLoaded", () => {
+    renderQuestion();
+    updateSidebarCounts();
+
+    const nextButton = document.getElementById("next-btn");
+    nextButton.addEventListener("click", goForward);
+
+    const prevButton = document.getElementById("prev-btn");
+    prevButton.addEventListener("click", goBack);
+
+    const submitButton = document.getElementById("submit-btn");
+    submitButton.addEventListener("click", onSubmit);
+
+    //ai helped me with this part
+    document.addEventListener("keydown", (event) => {
+
+        // Check if the pressed key is the Right Arrow key.
+        if (event.key === "ArrowRight") {
+            // If it is, move to the next question.
+            goForward();
+        }
+
+        // Check if the pressed key is the Left Arrow key.
+        if (event.key === "ArrowLeft") {
+            // If it is, move to the previous question.
+            goBack();
+        }
     });
 });
