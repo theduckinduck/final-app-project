@@ -244,7 +244,7 @@ function onSubmit(){
 
 function onSubmit() {
     let correctCount = 0;
-
+    //ai assissted
     answers.forEach((userAnswerIndex, questionIndex) => {
         const correctAnswerIndex = quizQuestions[questionIndex].correct;
 
@@ -257,7 +257,7 @@ function onSubmit() {
     correctScoreElement.textContent = correctCount;
 
     const mapContainer = document.getElementById("question-map");
-
+    //ai helped
     const mapButtons = mapContainer.querySelectorAll(".map-item");
 
     //ai helpe
