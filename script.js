@@ -118,7 +118,6 @@ function selectOption(optionIndex) {
         button.classList.toggle("selected", isSelected);
     }
 
-
     /*a
     llOptionButtons.forEach(button => {
         const buttonIndex = Number(button.dataset.index);
