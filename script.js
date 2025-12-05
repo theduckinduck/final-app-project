@@ -17,9 +17,11 @@ let currentQuestion = 0;
 let score = 0;
 const answers = new Array(quizQuestions.length);
 
+/*
 function fetchElements(id) {
     return document.getElementById(id);
 }
+*/
 
 /*
 function renderQuestion(){
@@ -57,7 +59,6 @@ function renderQuestion() {
     const optionsList = document.getElementById("options-list");
 
     while (optionsList.firstChild) {
-
         optionsList.removeChild(optionsList.firstChild);
     }
     
@@ -108,7 +109,7 @@ function selectOption(optionIndex) {
 
     const allOptionButtons = optionsContainer.querySelectorAll(".option");
 
-    //ai helped format, ionno how to use forEach; needa learn
+    //ai helped format, ionno how to use forEach
     allOptionButtons.forEach(button => {
         const buttonIndex = Number(button.dataset.index);
 
@@ -184,7 +185,7 @@ function renderQuestionMap() {
     }
 
     mapContainer.innerHTML = "";
-
+    //ai assisted
     quizQuestions.forEach((q, i) => {
         const buttonElement = document.createElement("button");
         buttonElement.className = "map-item";
