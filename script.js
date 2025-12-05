@@ -109,15 +109,25 @@ function selectOption(optionIndex) {
 
     const allOptionButtons = optionsContainer.querySelectorAll(".option");
 
-    //ai helped format, ionno how to use forEach
-    allOptionButtons.forEach(button => {
+    for (let i = 0; i < allOptionButtons.length; i++) {
+        const button = allOptionButtons[i];
+        
+        const buttonIndex = Number(button.dataset.index);
+
+        const isSelected = buttonIndex == optionIndex;
+        button.classList.toggle("selected", isSelected);
+    }
+
+
+    /*a
+    llOptionButtons.forEach(button => {
         const buttonIndex = Number(button.dataset.index);
 
         const isSelected = buttonIndex === optionIndex;
 
         button.classList.toggle("selected", isSelected);
     });
-
+    */
     updateSidebarCounts();
     renderQuestionMap();
 }
