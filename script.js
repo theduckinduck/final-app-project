@@ -107,11 +107,11 @@ function selectOption(optionIndex) {
 
     const optionsContainer = document.getElementById("options-list");
 
-    const allOptionButtons = optionsContainer.querySelectorAll(".option");
+    const optionButtons = optionsContainer.querySelectorAll(".option");
 
-    for (let i = 0; i < allOptionButtons.length; i++) {
-        const button = allOptionButtons[i];
-        
+    for (let i = 0; i < optionButtons.length; i++) {
+        const button = optionButtons[i];
+
         const buttonIndex = Number(button.dataset.index);
 
         const isSelected = buttonIndex == optionIndex;
