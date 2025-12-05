@@ -21,6 +21,7 @@ function fetchElements(id) {
     return document.getElementById(id);
 }
 
+/*
 function renderQuestion(){
     const question = quizQuestions[currentQuestion];
     fetchElements("questionIndex").textContent = currentQuestion + 1;
@@ -45,12 +46,76 @@ function renderQuestion(){
     updateProgressbar();
     renderQuestionMap();
 }
+*/
+function renderQuestion() {
+    const currentQ = quizQuestions[currentQuestion];
 
-// it"s self explanatory
+    document.getElementById("questionIndex").textContent = currentQuestion + 1;
+    document.getElementById("questionTotal").textContent = quizQuestions.length;
+    document.getElementById("questionText").textContent = currentQ.text;
+
+    const optionsList = document.getElementById("options-list");
+
+    while (optionsList.firstChild) {
+
+        optionsList.removeChild(optionsList.firstChild);
+    }
+    
+    //ai helped format this part
+    currentQ.options.forEach((opt, i) => {
+        const listItem = document.createElement("li");
+
+        const optionButton = document.createElement("button");
+
+        optionButton.type = "button";
+        optionButton.className = "option";
+        optionButton.textContent = opt;
+        optionButton.dataset.index = i;
+
+        if (answers[currentQuestion] === i) {
+            optionButton.classList.add("selected");
+        }
+
+        optionButton.addEventListener("click", () => {
+            selectOption(i);
+        });
+
+        listItem.appendChild(optionButton);
+        optionsList.appendChild(listItem);
+    });
+
+    updateProgressbar();
+    renderQuestionMap();
+}
+
+
+/*
 function selectOption(option){
     answers [currentQuestion] = option;
     const buttons = fetchElements("options-list").querySelectorAll(".option");
     buttons.forEach(button => button.classList.toggle("selected", Number(button.dataset.index) === option));
+
+    updateSidebarCounts();
+    renderQuestionMap();
+}
+*/
+
+//it's self explanatory
+function selectOption(optionIndex) {
+    answers[currentQuestion] = optionIndex;
+
+    const optionsContainer = document.getElementById("options-list");
+
+    const allOptionButtons = optionsContainer.querySelectorAll(".option");
+
+    //ai helped format, ionno how to use forEach; needa learn
+    allOptionButtons.forEach(button => {
+        const buttonIndex = Number(button.dataset.index);
+
+        const isSelected = buttonIndex === optionIndex;
+
+        button.classList.toggle("selected", isSelected);
+    });
 
     updateSidebarCounts();
     renderQuestionMap();
@@ -63,13 +128,26 @@ function updateProgressbar(){
     if (fill) fill.style.width = fillNum + "%";
 }
 
-//go forward
-function goNext(){
+/*
+function goForward(){
     if (currentQuestion < quizQuestions.length - 1) {
         currentQuestion++;
         renderQuestion();
     } else {
         fetchElements("submit-btn").classList.remove("hidden");
+    }
+}
+*/
+
+//go forward
+function goForward() {
+    if (currentQuestion < quizQuestions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+    } 
+    else {
+        const submitButton = document.getElementById("submit-btn");
+        submitButton.classList.remove("hidden");
     }
 }
 
@@ -81,6 +159,7 @@ function goBack(){
     }
 }
 
+/*
 function renderQuestionMap(){
     const map = fetchElements("question-map");
     if (!map) return;
@@ -93,6 +172,39 @@ function renderQuestionMap(){
         if (i === currentQuestion) b.style.outline = "2px solid #35c2b2";
         b.addEventListener("click", () => { currentQuestion = i; renderQuestion(); });
         map.appendChild(b);
+    });
+}
+ */
+
+function renderQuestionMap() {
+    const mapContainer = document.getElementById("question-map");
+
+    if (!mapContainer) {
+        return;
+    }
+
+    mapContainer.innerHTML = "";
+
+    quizQuestions.forEach((q, i) => {
+        const buttonElement = document.createElement("button");
+        buttonElement.className = "map-item";
+        buttonElement.textContent = i + 1;
+
+        if (answers[i] !== null) {
+            buttonElement.style.background = "rgba(53, 194, 178, 0.2)";
+        }
+
+        if (i === currentQuestion) {
+            buttonElement.style.outline = "2px solid #35c2b2";
+        }
+
+        buttonElement.addEventListener("click", () => {
+            currentQuestion = i;
+            renderQuestion();
+        });
+
+        // G. Add the newly created button to the map container.
+        mapContainer.appendChild(buttonElement);
     });
 }
 
@@ -127,13 +239,13 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSidebarCounts();
 
     // control thing
-    fetchElements("next-btn").addEventListener("click", goNext);
+    fetchElements("next-btn").addEventListener("click", goForward);
     fetchElements("prev-btn").addEventListener("click", goBack);
     fetchElements("submit-btn").addEventListener("click", onSubmit);
 
     // keyy nav
     document.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowRight") goNext();
+        if (event.key === "ArrowRight") goForward();
         if (event.key === "ArrowLeft") goBack();
     });
 });
