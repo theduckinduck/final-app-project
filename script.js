@@ -282,7 +282,8 @@ function onSubmit() {
 
         if (userAnswerIndex == null) {
             button.style.background = "rgba(255,255,255,0.02)";
-        } else {
+        }
+        else {
             const isCorrect = userAnswerIndex == correctAnswerIndex;
             button.style.background = isCorrect ? "rgba(53, 194, 178, 0.3)" : "rgba(255, 123, 123, 0.3)";
         }
