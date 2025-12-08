@@ -63,6 +63,32 @@ function renderQuestion() {
     }
     
     //ai helped format this part
+
+    for (let i = 0; i < currentQ.options.length; i++) {
+        const opt = currentQ.options[i];
+
+        const listItem = document.createElement("li");
+
+        const optionButton = document.createElement("button");
+
+        optionButton.type = "button";
+        optionButton.className = "option";
+        optionButton.textContent = opt;
+        optionButton.dataset.index = i;
+
+        if (answers[currentQuestion] == i) {
+            optionButton.classList.add("selected");
+        }
+
+        optionButton.addEventListener("click", () => {
+            selectOption(i);
+        });
+
+        listItem.appendChild(optionButton);
+        optionsList.appendChild(listItem);
+    }
+
+    /*
     currentQ.options.forEach((opt, i) => {
         const listItem = document.createElement("li");
 
@@ -84,7 +110,7 @@ function renderQuestion() {
         listItem.appendChild(optionButton);
         optionsList.appendChild(listItem);
     });
-
+    */
     updateProgressbar();
     renderQuestionMap();
 }
@@ -204,7 +230,7 @@ function renderQuestionMap() {
             buttonElement.style.background = "rgba(53, 194, 178, 0.2)";
         }
 
-        if (i === currentQuestion) {
+        if (i == currentQuestion) {
             buttonElement.style.outline = "2px solid #35c2b2";
         }
 
