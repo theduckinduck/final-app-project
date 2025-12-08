@@ -8,7 +8,17 @@ const quizQuestions = [
     { text: "Which HTTP method is typically used to update a resource?", options: ["GET", "POST", "PUT", "DELETE"], correct: 2 },
     { text: "In JavaScript, which keyword declares a constant?", options: ["var", "let", "const", "fixed"], correct: 2 },
     { text: "Which HTML attribute adds alternative text to images?", options: ["title", "alt", "desc", "text"], correct: 1 },
-    { text: "Which symbol starts a CSS class selector?", options: ["#", ".", "/", "*"], correct: 1 }
+    { text: "Which symbol starts a CSS class selector?", options: ["#", ".", "/", "*"], correct: 1 },
+    { text: "Which CSS property adds space inside an element?", options: ["padding", "margin", "border", "gap"], correct: 0 },
+    { text: "Which JavaScript method parses a JSON string?", options: ["JSON.parse()", "JSON.stringify()", "JSON.toObject()", "parseJSON()"], correct: 0 },
+    { text: "Which git command initializes a new repository?", options: ["git init", "git clone", "git add", "git commit"], correct: 0 },
+    { text: "Which HTML element defines the document's title shown in the browser tab?", options: ["head", "title", "h1", "meta"], correct: 1 },
+    { text: "Which loop is typically used when the number of iterations is unknown?", options: ["for", "while", "do-while", "foreach"], correct: 1 },
+    { text: "Which HTTP status code means 'Not Found'?", options: ["200", "301", "404", "500"], correct: 2 },
+    { text: "In CSS, which unit is relative to the root (html) font-size?", options: ["em", "rem", "px", "%"], correct: 1 },
+    { text: "Which HTML5 element is intended for navigation links?", options: ["nav", "section", "header", "aside"], correct: 0 },
+    { text: "What does API stand for?", options: ["Application Programming Interface", "Applied Program Interface", "App Programming Interface", "Advanced Program Integration"], correct: 0 },
+    { text: "Which array method adds an element to the end in JavaScript?", options: ["push", "pop", "shift", "unshift"], correct: 0 }
 ];
 // ai helped format ^
 
@@ -228,6 +238,8 @@ function renderQuestionMap() {
 
         if (answers[i] !== null) {
             buttonElement.style.background = "rgba(53, 194, 178, 0.2)";
+        } else {
+            buttonElement.style.background = "rgba(0, 0, 0, 0.6)";
         }
 
         if (i == currentQuestion) {
@@ -307,7 +319,7 @@ function onSubmit() {
         const correctAnswerIndex = quizQuestions[i].correct;
 
         if (userAnswerIndex == null) {
-            button.style.background = "rgba(255,255,255,0.02)";
+            button.style.background = "rgba(0, 0, 0, 0.6)";
         }
         else {
             const isCorrect = userAnswerIndex == correctAnswerIndex;
