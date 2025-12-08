@@ -255,13 +255,18 @@ function onSubmit(){
 function onSubmit() {
     let correctCount = 0;
     //ai assissted
-    answers.forEach((userAnswerIndex, questionIndex) => {
-        const correctAnswerIndex = quizQuestions[questionIndex].correct;
 
-        if (userAnswerIndex === correctAnswerIndex) {
+    for (let i = 0; i < answers.length; i++) {
+        const userAnswerIndex = answers[i];
+        const correctAnswerIndex = quizQuestions[i].correct;
+        if (userAnswerIndex == correctAnswerIndex) {
             correctCount++;
+        /*answers.forEach((userAnswerIndex, questionIndex) => {
+        const correctAnswerIndex = quizQuestions[questionIndex].correct;
+        */
+        
         }
-    });
+    };
 
     const correctScoreElement = document.getElementById("correct-count");
     correctScoreElement.textContent = correctCount;
@@ -270,8 +275,20 @@ function onSubmit() {
     //ai helped
     const mapButtons = mapContainer.querySelectorAll(".map-item");
 
-    //ai helpe
-    mapButtons.forEach((button, i) => {
+    for (let i = 0; i < mapButtons.length; i++) {
+        const button = mapButtons[i];
+        const userAnswerIndex = answers[i];
+        const correctAnswerIndex = quizQuestions[i].correct;
+
+        if (userAnswerIndex == null) {
+            button.style.background = "rgba(255,255,255,0.02)";
+        } else {
+            const isCorrect = userAnswerIndex == correctAnswerIndex;
+            button.style.background = isCorrect ? "rgba(53, 194, 178, 0.3)" : "rgba(255, 123, 123, 0.3)";
+        }
+    }
+
+    /*mapButtons.forEach((button, i) => {
         if (answers[i] === null) {
             button.style.background = "rgba(255,255,255,0.02)";
         } else {
@@ -280,7 +297,7 @@ function onSubmit() {
             button.style.background = isCorrect ? "rgba(53, 194, 178, 0.3)" : "rgba(255, 123, 123, 0.3)";
         }
     });
-
+    */
     alert(`You scored ${correctCount} out of ${quizQuestions.length}`);
     //  con cat n nate
 }
