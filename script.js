@@ -10,7 +10,7 @@ const quizQuestions = [
     { text: "Which HTML attribute adds alternative text to images?", options: ["title", "alt", "desc", "text"], correct: 1 },
     { text: "Which symbol starts a CSS class selector?", options: ["#", ".", "/", "*"], correct: 1 },
     { text: "Which CSS property adds space inside an element?", options: ["padding", "margin", "border", "gap"], correct: 0 },
-    { text: "Which JavaScript method parses a JSON string?", options: ["JSON.parse()", "JSON.stringify()", "JSON.toObject()", "parseJSON()"], correct: 0 },
+   /* { text: "Which JavaScript method parses a JSON string?", options: ["JSON.parse()", "JSON.stringify()", "JSON.toObject()", "parseJSON()"], correct: 0 },
     { text: "Which git command initializes a new repository?", options: ["git init", "git clone", "git add", "git commit"], correct: 0 },
     { text: "Which HTML element defines the document's title shown in the browser tab?", options: ["head", "title", "h1", "meta"], correct: 1 },
     { text: "Which loop is typically used when the number of iterations is unknown?", options: ["for", "while", "do-while", "foreach"], correct: 1 },
@@ -19,6 +19,7 @@ const quizQuestions = [
     { text: "Which HTML5 element is intended for navigation links?", options: ["nav", "section", "header", "aside"], correct: 0 },
     { text: "What does API stand for?", options: ["Application Programming Interface", "Applied Program Interface", "App Programming Interface", "Advanced Program Integration"], correct: 0 },
     { text: "Which array method adds an element to the end in JavaScript?", options: ["push", "pop", "shift", "unshift"], correct: 0 }
+     */
 ];
 // ai helped format ^
 
@@ -154,8 +155,8 @@ function selectOption(optionIndex) {
         button.classList.toggle("selected", isSelected);
     }
 
-    /*a
-    llOptionButtons.forEach(button => {
+    /*
+    allOptionButtons.forEach(button => {
         const buttonIndex = Number(button.dataset.index);
 
         const isSelected = buttonIndex === optionIndex;
